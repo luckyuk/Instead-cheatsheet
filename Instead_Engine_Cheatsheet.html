@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="" lang="en">
+
+<head>
+    <title>Instead Engine</title>
+    <style>
+        body {
+            background: #dddfdd none repeat scroll 0 0;
+            color: #c2e0c6;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+            font-size: 80%;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        #content {
+            background: #224d58 none repeat scroll 0 0;
+            margin: 0 auto;
+            padding: 6px 8px;
+            position: relative;
+            text-align: left;
+            width: 98%;
+        }
+        
+        #body_inner {
+            padding: 20px;
+        }
+        
+        .main_title_block {
+            display: inline-flex;
+            margin-bottom: 4%;
+        }
+        
+        .main_logo {
+            background-color: #000000;
+            border-top: 10px solid #c2e0c6;
+            padding: 10px 20px;
+            //width: 50%;
+        }
+        
+        .main_title {
+            padding-left: 4%;
+            width: 100%;
+        }
+        
+        .block {
+            background: #0e8a16 none repeat scroll 0 0;
+            border-bottom: 3px solid #0e8a16;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            padding-bottom: 0;
+        }
+        
+        .block_title {
+            //color: #fee5d3;
+            color: #ffffff;
+            margin: 0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        
+        i {
+            vertical-align: sub
+        }
+        
+        .block_text {
+            padding: 5px 10px;
+            color: #002b36;
+            background: #c2e0c6 none repeat scroll 0 0;
+        }
+        
+        .block_code {
+            font-family: Courier, Monaco, monospace;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: #073642 none repeat scroll 0 0;
+            color: #eee8d5;
+        }
+        
+        .rows_table {
+            background: white none repeat scroll 0 0;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            page-break-inside: avoid;
+            width: 100%;
+        }
+        
+        .row_even td {
+            background: #c2e0c6 none repeat scroll 0 0;
+            padding: 5px 10px;
+        }
+        
+        .row_odd td {
+            padding: 5px 10px;
+        }
+        
+        .block_footer {
+            margin-top: 10%;
+            border-top: solid 3px #ccc;
+            display: inline-flex;
+            width: 100%
+        }
+        
+        .block_footer_inner {
+            display: inline-flex;
+            margin-bottom: 4%;
+            margin-left: 4%;
+        }
+        
+        .image_footer {
+            width: 64px;
+            height: 64px;
+            margin-top: 10px;
+        }
+        
+        .text_footer {
+            margin-top: 16px;
+            margin-left: 10px;
+        }
+        
+        <!-- css -->
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div id="body_inner">
+            <h2 style="margin: 0px;">Instead Engine CheatSheet</h2>
+                <!-- header -->
+            </div>
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td class="column_1" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">Заголовок</h3>
+                                <div class="block_code">-- $Name: Самая интересная игра!$
+                                    <br>-- $Version: 0.5$
+                                    <br>-- $Author: Анонимный любитель текстовых приключений$
+                                    <br>-- $Info: Это ремейк старой игры\nС ZX specturm$</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Объект</h3>
+                                <div class="block_code">obj {
+                                    <br>&nbsp;&nbsp;nam = 'стол';
+                                    <br>&nbsp;&nbsp;dsc = 'В комнате стоит {стол}.';
+                                    <br>&nbsp;&nbsp;act = 'Гм... Просто стол...';
+                                    <br>&nbsp;&nbsp;};</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Комната</h3>
+                                <div class="block_code">room {
+                                    <br>&nbsp;&nbsp;nam = 'main';
+                                    <br>&nbsp;&nbsp;title = 'Начало приключения';
+                                    <br>&nbsp;&nbsp;disp = "Главная комната";
+                                    <br>&nbsp;&nbsp;dsc = [[Вы в большой комнате.]];
+                                    <br>&nbsp;&nbsp;way = { 'hall', 'street' };
+                                    <br>&nbsp;&nbsp;obj = { 'ящик', apple };
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Диалог</h3>
+                                <div class="block_code">dlg {
+                                    <br>&nbsp;&nbsp;nam = 'разговор';
+                                    <br>&nbsp;&nbsp;-- в диалогах обычно не нужен инвентарь
+                                    <br>&nbsp;&nbsp;noinv = true;
+                                    <br>&nbsp;&nbsp;title = [[Разговор с продавцом]];
+                                    <br>&nbsp;&nbsp;enter = [[Я обратился к продавцу.]];
+                                    <br>&nbsp;&nbsp;phr = {
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'У вас есть бобы?', '-- Нет.'},
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'У вас есть шоколад?', '-- Нет.'},
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'У вас есть квас?', '-- Да',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'А сколько он стоит?', '-- 50 рублей.' },
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'А он холодный?', '-- Холодильник сломался.',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'Беру два!', 'Остался один.',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'Дайте один!', function() p [[Ок!]]; take 'квас'; end };
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;}
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Функции стандартной библиотеки</h3>
+                                <div class="block_code"<ul>
+                                  <li>include(файл) - включить файл в игру;</li>
+                                  <li>loadmod(модуль) - подключить модуль игры;</li>
+                                  <li>rnd(m) - случайное целочисленное значение от '1' до 'm';</li>
+                                  <li>rnd(a, b) - случайное целочисленное значение от 'a' до 'b', где 'a' и 'b' целые &gt;= 0;</li>
+                                  <li>rnd_seed(что) - задать зерно генератора случайных чисел;</li>
+                                  <li>p(...) - вывод строки в буфер обработчика/атрибута (с пробелом в конце);</li>
+                                  <li>pr(...) - вывод строки в буфер обработчика/атрибута &quot;как есть&quot;;</li>
+                                  <li>pn(...) - вывод строки в буфер обработчика/атрибута (с переводом строки в конце);</li>
+                                  <li>pf(fmt, ...) - вывод форматной строки в буфер обработчика/атрибута;</p>
+                                  <li>pfn(...)(...)... &quot;строка&quot; - формирование простого обработчика;</li>
+                                  <li>obj {} - создание объекта;</li>
+                                  <li>stat {} - создание статуса;</li>
+                                  <li>room {} - создание комнаты;</li>
+                                  <li>menu {} - создание меню;</li>
+                                  <li>dlg {} - создание диалога;</li>
+                                  <li>me() - возвращает текущего игрока;</li>
+                                  <li>here() - возвращает текущую сцену;</li>
+                                  <li>from([w]) - возвращает комнату из которой осуществлен переход в текущую сцену;</li>
+                                  <li>new(конструктор, аргументы) - создание нового <em>динамического</em> объекта</li>
+                                  <li>delete(w) - удаление динамического объекта;</li>
+                                  <li>gamefile(файл, [сбросить состояние?]) - подгрузить динамически файл с игрой;</li>
+                                  <li>player {} - создать игрока;</li>
+                                  <li>dprint(...) - отладочный вывод;</li>
+                                  <li>visits([w]) - число визитов в данную комнату (или 0, если визитов не было);</li>
+                                  <li>visited([w]) - число визитов в комнату или false, если визитов не было;</li>
+                                  <li>walk(w, [булевое exit], [булевое enter], [булевое менять from]) - переход в сцену;</li>
+                                  <li>walkin(w) - переход в под-сцену (без вызова exit/onexit текущей комнаты);</li>
+                                  <li>walkout([w], [dofrom]) - возврат из под-сцены (без вызова enter/onenter);</li>
+                                  <li>walkback([w]) - синоним walkout([w], false);</li>
+                                  <li>_(w) - получение объекта;</li>
+                                  <li>for_all(fn, ....) - выполнить функцию для всех аргументов;</li>
+                                  <li>seen(w, [где]) - поиск видимого объекта;</li>
+                                  <li>lookup(w, [где]) - поиск объекта;</li>
+                                  <li>ways([где]) - получить список переходов;</li>
+                                  <li>objs([где]) - получить список объектов;</li>
+                                  <li>search(w) - поиск доступного игроку объекта;</li>
+                                  <li>have(w) - поиск предмета в инвентаре;</li>
+                                  <li>inroom(w) - возврат комнаты/комнат, в которой находится объект;</li>
+                                  <li>where(w, [таблица]) - возврат объекта/объектов, в котором находится объект;</li>
+                                  <li>closed(w) - true если объект закрыт;</li>
+                                  <li>disabled(w) - true если объект выключен;</li>
+                                  <li>enable(w) - включить объект;</li>
+                                  <li>disable(w) - выключить объект;</li>
+                                  <li>open(w) - открыть объект;</li>
+                                  <li>close(w) - закрыть объект;</li>
+                                  <li>actions(w, строка, [значение]) - возвращает (или устанавливает) число действий типа t для объекта w.</li>
+                                  <li>pop(тег) - возврат в прошлую ветвь диалога;</li>
+                                  <li>push(тег) - переход в следующую ветвь диалога</li>
+                                  <li>empty([w]) - пуста ли ветвь диалога? (или объект)</li>
+                                  <li>lifeon(w) - добавить объект в список живых;</li>
+                                  <li>lifeoff(w) - убрать объект из списка живых;</li>
+                                  <li>live(w) - объект жив?;</li>
+                                  <li>change_pl(w) - смена игрока;</li>
+                                  <li>player_moved([pl]) - текущий игрок перемещался в этом такте?;</li>
+                                  <li>inv([pl]) - получить список-инвентарь;</li>
+                                  <li>remove(w, [wh]) - удалить объект из объекта или комнаты; Удаляет объект из списков obj и way (оставляя во всех остальных, например, game.lifes);</li>
+                                  <li>purge(w) - уничтожить объект (из всех списков); Удаляет объект из <em>всех</em> списков, в которых он присутствует;</li>
+                                  <li>replace(w, ww, [wh]) - заменить один объект на другой;</li>
+                                  <li>place(w, [wh]) - поместить объект в объект/комнату (удалив его из старого объекта/комнаты);</li>
+                                  <li>put(w, [wh]) - поместить объект без удаления из старого местоположения;</li>
+                                  <li>take(w) - забрать объект;</li>
+                                  <li>drop(w, [wh]) - выбросить объект;</li>
+                                  <li>path {} - создать переход;</li>
+                                  <li>time() - число ходов от начала игры.</li>
+                               </ul></div>
+                            </div>
+                            <!-- column1 -->                        </td>
+                            <td class="column_space" width="2%"></td>
+                            <td class="column_2" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">Подключение модулей</h3>
+                                <div class="block_code">require "click" -- перехват кликов мыши по картинке сцены;
+                                <br>require "fmt" -- некоторые функции форматирования
+                                <br>fmt.para = true -- включить режим параграфов (отступы)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Модули</h3>
+                                <div class="block_code"<ul>
+                                    <li>'dbg' — модуль отладки;</li>
+                                    <li>'click' — модуль перехвата кликов мыши по картинке сцены;</li>
+                                    <li>'prefs' — модуль настроек (хранилище данных настроек);</li>
+                                    <li>'snapshots' — модуль поддержки снапшотов (для откатов игровых ситуаций);</li>
+                                    <li>'fmt' — модуль оформления вывода;</li>
+                                    <li>'theme' — управление темой на лету;</li>
+                                    <li>'noinv' - модуль работы с инвентарем;</li>
+                                    <li>'key'' - модуль обработки событий срабатывания клавиш;</li>
+                                    <li>'timer' - таймер;</li>
+                                    <li>'sprite' — модуль для работы со спрайтами;</li>
+                                    <li>'snd' — модуль работы со звуком;</li>
+                                    <li>'nolife' – модуль блокировки методов life;</li>
+                                    </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Атрибуты-списки</h3>
+                                <div class="block_text">Атрибуты-списки (такие как 'way' или 'obj') позволяют работать со своим содержимым с помощью набора методов</div>
+                                <div class="block_code">room {
+                                    <br>&nbsp;&nbsp;nam = &#39;холодильник&#39;;
+                                    <br>&nbsp;&nbsp;frost = std.list { &#39;мороженное&#39; };
+                                    <br>}</div>
+                                  <div class="block_code"<ul>
+                                    <li>disable() - отключает все объекты списка;</li>
+                                    <li>enable() - включает все объекты списка;</li>
+                                    <li>close() - закрыть все объекты списка;</li>
+                                    <li>open() - открыть все объекты списка;</li>
+                                    <li>add(объект|имя, [позиция]) - добавить объект;</li>
+                                    <li>for_each(функция, аргументы) - вызвать для каждого объекта функцию с аргументами;</li>
+                                    <li>lookup(имя/тег или объект) - поиск объекта в списке. Возвращает объект и индекс;</li>
+                                    <li>srch(имя/тег или объект) - поиск видимого объекта в списке;</li>
+                                    <li>empty() - вернет true, если список пуст;</li>
+                                    <li>zap() - очистить список;</li>
+                                    <li>replace(что, на что) - заменить объект в списке;</li>
+                                    <li>cat(список, [позиция]) - добавить содержимое списка в текущий список по позиции;</li>
+                                    <li>del(имя/объект) - удалить объект из списка.</li>
+                                    </ul></div>
+                                <div class="block_text"> Существуют функции, возвращающие объекты-списки:</div>
+                                <div class="block_code"<ul>
+                                  <li>inv([игрок]) - вернуть инвентарь игрока;</li>
+                                  <li>objs([комната]) - вернуть объекты комнаты;</li>
+                                  <li>ways([комната]) - вернуть переходы комнаты.</li>
+                                  </ul></div>
+                                <div class="block_code">    pl.obj:add &#39;нож&#39;</div>
+                                <div class="block_text">Числовой атрибут pri, 
+                                играет роль <em>приоритета</em> в списке. Если pri не задан, значением
+                                приоритета считается 0. Таким образом, если вы хотите, чтобы какой-то объект
+                                был первым в списке, давайте ему приоритет pri &lt; 0. Если в конце списка &#8211 &gt; 0.</div>
+                                <div class="block_code">obj {
+                                    <br>&nbsp;&nbsp;pri = -100;
+                                    <br>&nbsp;&nbsp;nam = &#39;штука&#39;;
+                                    <br>&nbsp;&nbsp;disp = &#39;Очень важный предмет инвентаря&#39;;
+                                    <br>&nbsp;&nbsp;inv = [[Осторожней с этим предметом.]];
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Функции, возвращающие объекты</h3>
+                                <div class="block_text"<ul>
+                                   <li>в символах [ ] описаны необязательные параметры;</li>
+                                   <li>'что' или 'где' - означает объект (в том числе комнату), заданный тегом, именем или переменной-ссылкой;</li>
+                                   </ul></div>
+                                <div class="block_code"<ul>
+                                  <li>'_(что)' - получить объект;</li>
+                                  <li>'me()' возвращает текущего объекта-игрока;</li>
+                                  <li>'here()' возвращает текущую сцену;</li>
+                                  <li>'where(что)' возвращает комнату или объект в котором находится заданный объект, если объект находится в нескольких местах, то можно передать второй параметр -- таблицу Lua, в которую будут добавлены эти объекты;</li>
+                                  <li>'inroom(что)' аналогично where(), но вернет комнату, в которой расположен объект (это важно для объектов в объектах);</li>
+                                  <li>'from([где])' возвращает прошлую комнату, из которой игрок перешел в заданную комнату. Необязательный параметр -- получить прошлую комнату не для текущей комнаты, а для заданной;</li>
+                                  <li>'seen(что, [где])' возвращает объект или переход, если он присутствует и видим, есть второй необязательный параметр -- выбрать сцену или объект/список в котором искать;</li>
+                                  <li>'lookup(что, [где])' возвращает объект или переход, если он существует в сцене или объекте/списке;</li>
+                                  <li>'inspect(что)' возвращает объект, если он виден/доступен на сцене. Поиск производится по переходам и объектам, в том числе, в объектах игрока;</li>
+                                  <li>'have(что)' возвращает объект, если он есть в инвентаре и не отключен;</li>
+                                  <li>'live(что)' возвращает объект, если он присутствует среди живых объектов (описано далее);</li>
+                                  </ul> </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Атрибуты и обработчики<br>объектов и комнат (obj и room)</h3>
+                                <div class="block_code"<ul>
+                                  <li>ini - обработчик, вызывается для объекта/комнаты при конструировании игрового мира, может быть только функцией;</li>
+                                  <li>dsc - атрибут, вызывается для вывода описания;</li>
+                                  <li>disp - атрибут, информация об объекте в инвентаре или комнаты в списке переходов;</li>
+                                  <li>title - атрибут комнаты, название комнаты выводимое при нахождении внутри этой комнаты;</li>
+                                  <li>decor - атрибут комнаты, вызывается для вывода описания декораций в сцене;</li>
+                                  <li>nolife - атрибут комнаты, не вызывать обработчики живых объектов;</li>
+                                  <li>noinv - атрибут комнаты, не показывать инвентарь;</li>
+                                  <li>obj - атрибут, список вложенных объектов;</li>
+                                  <li>way - атрибут комнаты, список с переходами в другие комнаты;</li>
+                                  <li>life - обработчик, вызывается для &quot;живых&quot; (фоновых) объектов;</li>
+                                  <li>act - обработчик объекта, вызывается при действии на предмет сцены;</li>
+                                  <li>tak - обработчик взятия предмета со сцены (если не задан act);</li>
+                                  <li>inv - обработчик объекта, вызывается при действии на предмет инвентаря;</li>
+                                  <li>use(s, на что) - обработчик объекта, вызывается при использовании предмета инвентаря на предмет сцены или инвентаря;</li>
+                                  <li>used(s, что) - обработчик объекта, вызывается перед use при использовании предмета (страдательная форма);</li>
+                                  <li>onenter(s, откуда) - обработчик комнаты, вызывается при заходе в комнату игрока, может запретить переход;</li>
+                                  <li>enter(s, откуда) - обработчик комнаты, вызывается после успешного входа в комнату;</li>
+                                  <li>onexit(s, куда) - обработчик комнаты, вызывается при выходе из комнаты, может запретить переход;</li>
+                                  <li>exit(s, куда) - обработчик комнаты, вызывается после успешного выхода из комнаты.</li>
+                                </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Атрибуты и обработчики<br>>игрового мира (game)</h3>
+                                <div class="block_code"<ul>
+                                  <li>use(s, что, на что) - обработчик, действие по умолчанию для использования предмета;</li>
+                                  <li>act(s, что) - обработчик, действие по умолчанию при применении предмета сцены;</li>
+                                  <li>inv(s, что) - обработчик, действие по умолчанию при применении предмета инвентаря;</li>
+                                  <li>on{use,act,tak,inv,walk} - обработчик, реакция перед вызовом соответствующих обработчиков, может запрещать цепочку;</li>
+                                  <li>after{use,act,tak,inv,walk} - обработчик, реакция после действий игрока.</li>
+                                </ul></div>
+                            </div>
+                        </td>
+                        <td class="column_space" width="2%"></td>
+                        <td class="column_2" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">Обработчики по-умолчанию</h3>
+                                <div class="block_code">game.act = 'Не работает.';
+                                <br>game.use = 'Это не поможет.';
+                                <br>game.inv = 'Зачем мне это?';</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Глобальные переменные</h3>
+                                <div class="block_code">global { -- определение глобальных переменных
+                                    <br>&nbsp;&nbsp;global_var = 1; -- число
+                                    <br>&nbsp;&nbsp;some_number = 1.2; -- число
+                                    <br>&nbsp;&nbsp;some_string = 'строка';
+                                    <br>&nbsp;&nbsp;know_truth = false; -- булево значение
+                                    <br>&nbsp;&nbsp;array = {1, 2, 3, 4}; -- массив
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Константы</h3>
+                                <div class="block_code">const {
+                                    <br>&nbsp;&nbsp;A = 1;
+                                    <br>&nbsp;&nbsp;B = 2;
+                                    <br>}
+                                    <br>const 'Aflag' (false)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Декларации</h3>
+                                <div class="block_code">declare {
+                                    <br>&nbsp;&nbsp;A = 1;
+                                    <br>&nbsp;&nbsp;B = 2;
+                                    <br>}
+                                    <br>declare 'Z' (false)
+                                    <br>
+                                    <br>declare 'test' (function()
+                                    <br>&nbsp;&nbsp;p "Hello world!"
+                                    <br>end)
+                                    <br>
+                                    <br>global 'f' (test)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Вспомогательные функции</h3>
+                                <div class="block_code">function mprint(n, ...)
+                                    <br>&nbsp;&nbsp;local a = {...}; -- временный массив с аргументами к функции
+                                    <br>&nbsp;&nbsp;p(a[n]) -- выведем n-й элемент массива
+                                    <br>end</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Объект "Игрок"</h3>
+                                <div class="block_text">По умолчанию, атрибут 'obj' у игрока представляет собой инвентарь.</div>
+                                <div class="block_code">game.player = player {
+                                    <br>&nbsp;&nbsp;nam = "Василий";
+                                    <br>&nbsp;&nbsp;room = 'кухня'; -- стартовая комната игрока
+                                    <br>&nbsp;&nbsp;power = 100;
+                                    <br>&nbsp;&nbsp;obj = { 'яблоко' }; -- заодно добавим яблоко в инвентарь
+                                    <br>};</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Объект "Мир"</h3>
+                                <div class="block_text"> Имя такого объекта 'game'.
+                                Существует ссылка-переменная, которая также называется game.</div>
+                                <div class="block_code">game.act = 'Не получается.';
+                                    <br>game.inv = 'Гм.. Странная штука..';
+                                    <br>game.use = 'Не сработает...';
+                                    <br>game.tak = 'Не нужно мне это...';</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Методы объекта (obj)</h3>
+                                <div class="block_code"<ul>
+                                  <li>:with({...}) - задание списка obj;</li>
+                                  <li>:new(...) - конструктор;</li>
+                                  <li>:actions(тип, [значение]) - задать/прочитать число событий объекта заданного типа;</li>
+                                  <li>:inroom([{}]) - в какой комнате (комнатах) находится объект;</li>
+                                  <li>:where([{}]) - в каком объекте (объектах) находится объект;</li>
+                                  <li>:purge() - удалить объект из всех списков;</li>
+                                  <li>:remove() - удалить объект из всех объектов/комнат/инвентаря;</li>
+                                  <li>:close()/:open() - закрыть/открыть;</li>
+                                  <li>:disable()/:enable() - выключить/включить;</li>
+                                  <li>:closed() -- вернет true, если закрыт;</li>
+                                  <li>:disabled() -- вернет true, если выключен;</li>
+                                  <li>:empty() -- вернет true, если пуст;</li>
+                                  <li>:save(fp, n) -- функция сохранения;</li>
+                                  <li>:display() -- функция отображения в сцене;</li>
+                                  <li>:visible() -- вернет true если считается видимым;</li>
+                                  <li>:srch(w) -- поиск видимого объекта;</li>
+                                  <li>:lookup(w) -- поиск любого объекта;</li>
+                                  <li>:for_each(fn, ...) -- итератор по объектам;</li>
+                                  <li>:lifeon()/:lifeoff() -- добавить/удалить из списка живых;</li>
+                                  <li>:live() -- вернет true, если в списке живых.</li>
+                                </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Методы комнаты (room)</h3>
+                                <div class="block_text">Кроме методов obj, добавлены следующие методы:</div>
+                                <div class="block_code"<ul>
+                                  <li>:from() -- откуда пришли в комнату;</li>
+                                  <li>:visited() -- была ли комната посещена ранее?;</li>
+                                  <li>:visits() -- число визитов (0 -- если не было);</li>
+                                  <li>:scene() -- отображение сцены (не объектов);</li>
+                                  <li>:display() -- отображение объектов сцены;</li>
+                                </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Методы диалога (dlg)</h3>
+                                <div class="block_text">Кроме методов room, добавлены следующие методы:</div>
+                                <div class="block_code"<ul>
+                                  <li>:push(фраза) - перейти к фразе с запоминанием ее в стеке;</li>
+                                  <li>:reset(фраза) -- то же самое, но со сбросом стека;</li>
+                                  <li>:pop([фраза]) -- возврат по стеку;</li>
+                                  <li>:select([фраза]) -- выбор текущей фразы;</li>
+                                  <li>:ph_display() -- отображение выбранной фразы;</li>
+                                </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Методы игрового мира (game)</h3>
+                                <div class="block_text">Кроме методов obj, добавлены следующие методы:</div>
+                                <div class="block_code"<ul>
+                                  <li>:time([v]) -- установить/взять число игровых тактов;</li>
+                                  <li>:lifeon([v])/:lifeoff([v]) -- добавить/удалить объект из списка живых, или включить/выключить живой список глобально (если не задан аргумент);</li>
+                                  <li>:live([v]) -- проверить активность живого объекта;</li>
+                                  <li>:set_pl(pl) -- переключить игрока;</li>
+                                  <li>:life() -- итерация живых объектов;</li>
+                                  <li>:step() -- такт игры;</li>
+                                  <li>:lastdisp([v]) -- установить/взять последний вывод;</li>
+                                  <li>:display(state) -- отобразить вывод;</li>
+                                  <li>:lastreact([v]) -- установить/взять последнюю реакцию;</li>
+                                  <li>:reaction([v]) -- установить/взять текущую реакцию;</li>
+                                  <li>:events(pre, bg) -- установить/взять события живых объектов;</li>
+                                  <li>:cmd(cmd) -- выполнение команды INSTEAD;</li>
+                                </ul></div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Игрок (player)</h3>
+                                <div class="block_text">Кроме методов obj, добавлены следующие методы:</div>
+                                <div class="block_code"<ul>
+                                  <li>:moved() -- игрок сделал перемещение в текущем такте игры;</li>
+                                  <li>:need_scene([v]) -- нужна отрисовка сцены в данном такте;</li>
+                                  <li>:inspect(w) -- найти объект (видимый) в текущей сцене или себе самом;</li>
+                                  <li>:have(w) -- поиск в инвентаре;</li>
+                                  <li>:useit(w) -- использовать предмет;</li>
+                                  <li>:useon(w, ww) -- использовать предмет на предмет;</li>
+                                  <li>:call(m, ...) -- вызов метода игрока;</li>
+                                  <li>:action(w) -- действие на предмет (act);</li>
+                                  <li>:inventory() -- вернуть инвентарь (список, по умолчанию это obj);</li>
+                                  <li>:take(w) -- взять объект;</li>
+                                  <li>:walk/walkin/walkout -- переходы;</li>
+                                  <li>:go(w) -- команда идти (проверяет доступность переходов);</li>
+                                </ul></div>
+                            </div>
+                            </td>
+                        <td class="column_space" width="2%"></td>
+                        <!-- columns -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
