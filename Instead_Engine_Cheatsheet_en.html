@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html class="" lang="en">
+
+<head>
+    <title>Instead Engine</title>
+    <style>
+        body {
+            background: #dddfdd none repeat scroll 0 0;
+            color: #c2e0c6;
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+            font-size: 80%;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        #content {
+            background: #224d58 none repeat scroll 0 0;
+            margin: 0 auto;
+            padding: 6px 8px;
+            position: relative;
+            text-align: left;
+            width: 98%;
+        }
+        
+        #body_inner {
+            padding: 20px;
+        }
+        
+        .main_title_block {
+            display: inline-flex;
+            margin-bottom: 4%;
+        }
+        
+        .main_logo {
+            background-color: #000000;
+            border-top: 10px solid #c2e0c6;
+            padding: 10px 20px;
+            //width: 50%;
+        }
+        
+        .main_title {
+            padding-left: 4%;
+            width: 100%;
+        }
+        
+        .block {
+            background: #0e8a16 none repeat scroll 0 0;
+            border-bottom: 3px solid #0e8a16;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            padding-bottom: 0;
+        }
+        
+        .block_title {
+            //color: #fee5d3;
+            color: #ffffff;
+            margin: 0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        
+        i {
+            vertical-align: sub
+        }
+        
+        .block_text {
+            padding: 5px 10px;
+            color: #002b36;
+            background: #c2e0c6 none repeat scroll 0 0;
+        }
+        
+        .block_code {
+            font-family: Courier, Monaco, monospace;
+            padding: 5px 10px;
+            border-radius: 8px;
+            background: #073642 none repeat scroll 0 0;
+            color: #eee8d5;
+        }
+        
+        .rows_table {
+            background: white none repeat scroll 0 0;
+            border-collapse: collapse;
+            margin: 0;
+            padding: 0;
+            page-break-inside: avoid;
+            width: 100%;
+        }
+        
+        .row_even td {
+            background: #c2e0c6 none repeat scroll 0 0;
+            padding: 5px 10px;
+        }
+        
+        .row_odd td {
+            padding: 5px 10px;
+        }
+        
+        .block_footer {
+            margin-top: 10%;
+            border-top: solid 3px #ccc;
+            display: inline-flex;
+            width: 100%
+        }
+        
+        .block_footer_inner {
+            display: inline-flex;
+            margin-bottom: 4%;
+            margin-left: 4%;
+        }
+        
+        .image_footer {
+            width: 64px;
+            height: 64px;
+            margin-top: 10px;
+        }
+        
+        .text_footer {
+            margin-top: 16px;
+            margin-left: 10px;
+        }
+        
+        <!-- css -->
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <div id="body_inner">
+            <h2 style="margin: 0px;">Instead Engine CheatSheet</h2>
+                <!-- header -->
+            </div>
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td class="column_1" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">The Head</h3>
+                                <div class="block_text">Any sequence of characters starting with
+                                a double-dash on the same line is a Lua comment.
+                                INSTEAD tags are comment lines of the following form:
+                                <pre>-- $TagName: A string of UTF-8 characters$</pre></div>
+                                <div class="block_code">-- $Name: the Most interesting game!$
+                                    <br>-- $Version: 0.5$
+                                    <br>-- $Author: Anonymous fan of text adventures$
+                                    <br>-- $Info: This is a remake of a classic\nZX Spectrum game.$</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The Object</h3>
+                                <div class="block_code">obj {
+                                    <br>&nbsp;&nbsp;nam = 'table';
+                                    <br>&nbsp;&nbsp;dsc = 'In the {table}.';
+                                    <br>&nbsp;&nbsp;act = 'Hm... Just a table...';
+                                    <br>&nbsp;&nbsp;tak = 'I took the corner of the table';
+                                    <br>&nbsp;&nbsp;inv = 'I hold the corner of the table.';
+                                    <br>&nbsp;&nbsp;};</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The Room</h3>
+                                <div class="block_code">room {
+                                    <br>&nbsp;&nbsp;nam = 'main';
+                                    <br>&nbsp;&nbsp;title = 'Start of adventure';
+                                    <br>&nbsp;&nbsp;disp = "Main room";
+                                    <br>&nbsp;&nbsp;dsc = [[You are in a large room.]];
+                                    <br>&nbsp;&nbsp;way = { 'hall', 'street' };
+                                    <br>&nbsp;&nbsp;obj = { 'table', 'armchair' };
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Dialogue</h3>
+                                <div class="block_code">dlg {
+                                    <br>&nbsp;&nbsp;nam = 'conversation';
+                                    <br>&nbsp;&nbsp;-- in the dialogues typically do not require inventory
+                                    <br>&nbsp;&nbsp;noinv = true;
+                                    <br>&nbsp;&nbsp;title = [[the Conversation with the seller]];
+                                    <br>&nbsp;&nbsp;enter = [[I asked the seller.]]];
+                                    <br>&nbsp;&nbsp;phr = {
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'You have beans?', '-- No.'},
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'You have chocolate?', '-- No.'},
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;{ 'You have a brew?', '-- Yes',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'How much is it worth?', '-- 50 rubles.' },
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'He is cold?', '-- Fridge was broken.',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'Take two!', 'Left one.',
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ 'Give me one!', function() p [[OK!]]; take 'brew'; end };
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;}
+                                    <br>&nbsp;&nbsp;}
+                                    <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Standard library functions</h3>
+                                <div class="block_text">[ wh] - indicates an optional parameter.</div>
+                                <div class="block_code">
+                                <li>include(file) - file to include in the game;
+                                include &quot;lib&quot; -- will include the lib file.lua
+                                from the current directory with the game;</li>
+                                <li>loadmod(module) to connect the module of the game;
+                                <br>loadmod &quot;module&quot; -- will include the module module.lua from the current directory;</li>
+                                <li>rnd(m) - a random integer value from '1' to 'm';</li>
+                                <li>rnd(a, b) - a random integer value from 'a' to 'b' where 'a' and 'b' are integers &gt;= 0;</li>
+                                <li>rnd_seed () - set seed of random number generator;</li>
+                                <li>p (...) output a string to the buffer handler/attribute (with a space at the end);</li>
+                                <li>pr (...) output a string to the buffer handler/attribute &quot;as is&quot;;
+                                <br>pn (...) output a string to the buffer handler/attribute (with a newline at the end);</li>
+                                <li>pf(fmt, ...) - output formatted string to the buffer handler/attribute;
+                                <br>local text = &#39;hello&#39;;
+                                <br>pf(&quot;String: %q: %d\n&quot;, text, 10);</li>
+                                <li>pfn(...)(...)... &quot;line&quot; - creating a simple handler;
+                                This feature simplifies the creation of simple handlers:
+                                <br>act = pfn(walk, &#39;bathroom&#39;) &quot;I decided to go to the bathroom.&quot;;
+                                <br>act = pfn(enable, &#39;#transition&#39;) &quot;I noticed a hole in the wall!&quot;;</li>
+                                <li>obj {} - create object;</li>
+                                <li>stat {} - create status;</li>
+                                <li>room {} - create a room;</li>
+                                <li>menu {} - create a menu;</li>
+                                <li>dlg {} - create a dialogue;</li>
+                                <li>me() - returns the current player;</li>
+                                <li>here() - returns the current scene.</li>
+                                <li>from([w]) - returns the room from which the transition to your current scene.</li>
+                                <li>new(constructor, arguments) - creates a new dinamicheskogo object (to be described later);</li>
+                                <li>delete(w) - deletes the dynamic object;</li>
+                                <li>gamefile(file, [reset?]) - load dynamically the file with the game;
+                                <br>gamefile(&quot;part2.lua&quot;, true) -- reset the game state (remove
+                                objects and variables), load part2.lua and start with the main room.</li>
+                                <li>player {} - create a player;- dprint(...) - debug output;</li>
+                                <li>visits([w]) - the number of visits to the bathroom (or 0 if visits);</li>
+                                <li>visited([w]) - the number of visits to the room, or false if not visits was;
+                                <br>if not visited() then
+                                <br>&nbsp;&nbsp;p [[it&#39;s my first time.]]
+                                <br>end</li>
+                                <li>walk(w, [Boolean exit], [enter Boolean], [Boolean to change from]) - transition in the scene;
+                                <br>-- unconditional jump (to ignore onexit/the onenter/exit/enter);
+                                <br>walk(&#39;end&#39;, false, false)</li>
+                                <li>walkin(w) is a transition in the scene (without calling exit/onexit current);</li>
+                                <li>walkout([w], [dofrom]) - return from sub-scene (without calling enter/the onenter);</li>
+                                <li>walkback([w]) - a synonym walkout([w], false);</li>
+                                <li>_(w) - receiving object;</li>
+                                <li>for_all(fn, ....) - to perform the function for all arguments;
+                                <br>for_all(enable, &#39;window&#39;, &#39;door&#39;);</li>
+                                <li>seen(w, [where]) - search for the visible object;</li>
+                                <li>lookup(w, [where]) is a search object;</li>
+                                <li>ways([where]) - get list of transitions;</li>
+                                <li>objs([where]) - get the list of objects;</li>
+                                <li>search(w) - search for the player object;</li>
+                                <li>have(w) - search for items in the inventory;</li>
+                                <li>inroom(w) - the return of the room/rooms, in which the object resides;</li>
+                                <li>where(w, [table]) - return the object/objects in which the object resides;
+                                <br>local list = {}
+                                <br>local w = where(&#39;Apple&#39;, list)
+                                <br>-- if the Apple is in more than one place, then list will contain an
+                                <br>-- array of these places. If you only need one location, then:
+                                <br>where &#39;Apple&#39; -- will be enough</li>
+                                <li>closed(w) - true if the object is closed;</li>
+                                <li>disabled(w) - true if the object is off;</li>
+                                <li>enable(w) is to include an object;</li>
+                                <li>disable(w) - off object;</li>
+                                <li>open(w) - open;</li>
+                                <li>close(w) - close the object;</li>
+                                <li>actions(w, string, [value]) - returns (or sets) the number of actions of type t to an object w.
+                                <br>if actions(w, &#39;tak&#39;) &gt; 0 then -- object w was taken at least 1 time;
+                                <br>if actions(w) == 1 then -- act it w was called 1 times;</li>
+                                <li>pop(tag) - return to the last branch of the dialog;</li>
+                                <li>push(tag) - the transition to the next branch of dialogue</li>
+                                <li>empty([w]) - empty right branch of the dialogue? (or object)</li>
+                                <li>lifeon(w) - add an object to the list of the living;</li>
+                                <li>lifeoff(w) - to remove an object from the list of the living;</li>
+                                <li>live(w) - object is alive?;</li>
+                                <li>change_pl(w) - change a player;</li>
+                                <li>player_moved([pl]) is the current player moved in this manner?;</li>
+                                <li>inv([pl]) - get a list of the inventory;</li>
+                                <li>remove(w, [wh]) - delete the object from object or room; Removes object obj
+                                from list and way (leaving all the rest, for example, game.lifes);</li>
+                                <li>purge(w) - destroy the object (from all lists); Removes the object from all lists in which it is present;</li>
+                                <li>replace(w, ww, [wh]) is to replace one object to another;</li>
+                                <li>place(w, [wh]) is to put the object in the object/room (removing it from the old object/rooms);</li>
+                                <li>put(w, [wh]) - put object without removing it from the old location;</li>
+                                <li>take(w) - pick up object;</li>
+                                <li>drop(w, [wh]) - to throw object;</li>
+                                <li>path {} - create a transition;</li>
+                                <li>time () is the number of moves from the beginning of the game.</li>
+                              </div>
+                            </div>
+                            <!-- column1 -->                        </td>
+                            <td class="column_space" width="2%"></td>
+                            <td class="column_2" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">The connection modules</h3>
+                                <div class="block_text">require "module name" or loadmod "module name"</div>
+                                <div class="block_code">require "click" --  plug-in click;
+                                <br>require "fmt" -- some formatting functions
+                                <br>fmt.para = true -- enable the paragraphs (indents)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The Modules</h3>
+                                <div class="block_code">
+                                <li>'dbg' module debugging.</li>
+                                <li>'click' — module intercept mouse clicks on the image of the scene;</li>
+                                <li>'prefs' module settings (data warehouse settings);</li>
+                                <li>'snapshots' — a plugin to support snapshots (for kickbacks of game situations);</li>
+                                <li>'fmt' module of withdrawal;</li>
+                                <li>'theme' — the office theme on the fly;</li>
+                                <li>'noinv' module to operate the equipment;</li>
+                                <li>'key&quot; - module event processing of the operation keys;</li>
+                                <li>'timer' - timer;</li>
+                                <li>'sprite' — module for working with sprites;</li>
+                                <li>'snd' module audio;</li>
+                                <li>'nolife' module locking methods life;</li>
+                              </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The List Attributes</h3>
+                                <div class="block_text">List attributes (such as 'way' or 'obj')
+                                allow you to work with its content with a set of methods.</div>
+                                <div class="block_code">room {
+                                    <br>&nbsp;&nbsp;nam = &#39;fridge&#39;;
+                                    <br>&nbsp;&nbsp;frost = std.list { &#39;ice cream&#39; };
+                                    <br>}
+                                    <br>ways():disable() -- disable all transitions
+                                    </div>
+                                  <div class="block_code">
+                                    <li>disable() - disables all objects in the list;</li>
+                                    <li>enable() - enables all objects of the list.</li>
+                                    <li>close() - close all objects of the list.</li>
+                                    <li>open() - open the list objects;</li>
+                                    <li>add(object|name [position]) - add an object;</li>
+                                    <li>for_each(function, args) - to call for each object feature arguments;</li>
+                                    <li>lookup(name/tag or object) is object search in the list. Returns the object and the index;</li>
+                                    <li>srch(name/tag or the object) - the search for a visible object in the list;</li>
+                                    <li>empty() - returns true if the list is empty;</li>
+                                    <li>zap() - clear the list;</li>
+                                    <li>replace(what, what) - replace the object in the list;</li>
+                                    <li>cat(list, [position]) - add the contents of the list into the current list position;</li>
+                                    <li>del(name/object) - delete object from the list.</li>
+                                  </div>
+                                <div class="block_text"> СThere are functions that return the objects lists:</div>
+                                <div class="block_code">
+                                  <li>inv([player]) - return the player's inventory;</li>
+                                  <li>objs([where]) - return objects of the room;</li>
+                                  <li>ways([room]) - return transitions of the room.</li>
+                                 </div>
+                                  <div class="block_text">Of course, you can refer to the lists directly:</div>
+                                  <div class="block_code">pl.obj:add &#39;нож&#39;</div>
+                                <div class="block_text">The objects in the lists are stored in the order in which 
+                                they add. However, if the object is present numeric attribute pri he plays
+                                the role of priority in the list. If pri is not specified, the value priority 
+                                0 is considered. Thus, if you want some the object was first on the list, give 
+                                priority pri &lt; 0. If the end of the list  &#8211 &gt; 0.</div>
+                                <div class="block_code">obj {
+                                 <br>&nbsp;&nbsp;pri = -100;
+                                 <br>&nbsp;&nbsp;nam = 'thing';
+                                 <br>&nbsp;&nbsp;disp = 'Very important item';
+                                 <br>&nbsp;&nbsp;inv = [[Careful with this subject.]];
+                                 <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Functions that return objects</h3>
+                                <div class="block_text">
+                                  <li>the characters [ ] describe the optional parameters;</li>
+                                  <li>'what' or 'where' - means an object (including the room)
+                                  is specified by the tag name or a variable reference;</li>
+                                </div>
+                                <div class="block_code">
+                                  <li>'_(what) ' - get the object;</li>
+                                  <li>'me()' returns the current object to the player;</li>
+                                  <li>'here()' returns the current scene.</li>
+                                  <li>'where ()' returns a room or an object which is the specified object if the object is in multiple places, you can pass in a second parameter -- a Lua table that will be added these objects;</li>
+                                  <li>'inroom ()' similar to where(), but returns the room in which the facility is located (this is important for objects in the objects);</li>
+                                  <li>'from([where])' returns the last room the player goes into given room. Optional parameter -- to the last room not for the current room, and for a given;</li>
+                                  <li>'seen(what [, where])' returns an object or transition, if itis present and can see, there is a second optional parameter -- select the scene or object/list in which to search;</li>
+                                  <li>'lookup(what, [where])' returns an object or transition, if it there is in the scene or object/list;</li>
+                                  <li>'inspect ()' returns the object if it is visible/available on stage. The search is performed for transitions and objects, including, in the object of the player;</li>
+                                  <li>'have ()' returns the object if it is in the inventory and not disabled;</li>
+                                  <li>'live ()' returns the object if it is present among the living objects ( described below);</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">List of attributes and handlers<br>for bjects and rooms (obj, room)</h3>
+                                <div class="block_code">
+                                  <li>nam - attribute;</li>
+                                  <li>tag - attribute;</li>
+                                  <li>ini - handler, called for an object / room during construction game world, can only be a function;</li>
+                                  <li>dsc - attribute, called to output the description;</li>
+                                  <li>disp - attribute, information about an item in the inventory or a room in way list;</li>
+                                  <li>title - attribute of the room, the name of the room displayed when found inside this room;</li>
+                                  <li>decor - attribute of the room, called to display a description of the static decorations in scene;</li>
+                                  <li>nolife - room attribute, do not call live object handlers;</li>
+                                  <li>noinv - room attribute, do not show inventory;</li>
+                                  <li>obj - attribute, list of nested objects;</li>
+                                  <li>way - attribute of room, list of rooms to walk;</li>
+                                  <li>life - handler, called for &quot;live&quot; (background) objects;</li>
+                                  <li>act - object handler, called when acting on a scene object;</li>
+                                  <li>tak - handler for taking an object from the scene (if act is not specified);</li>
+                                  <li>inv - object handler, called when acting on an inventory object;</li>
+                                  <li>use(s, on what) - object handler, called when using inventory item on another item;</li>
+                                  <li>used (s, that) - object handler, called before use when using this item (passive form);</li>
+                                  <li>onenter(s, from where) - room handler, called when entering the the room, can cancel when returning false;</li>
+                                  <li>enter(s, where) - room handler, is called after a successful entering the room;</li>
+                                  <li>onexit(s, where) - room handler, called when leaving room, can cancel when returning false;</li>
+                                  <li>exit(s, where) - room handler, is called after a successful exit from the room.</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">List of attributes and handlers<br>for game world (game)</h3>
+                                <div class="block_code">
+                                  <li>use (s, what, on what) - handler, default action for the use of the object;</li>
+                                  <li>act(s, that) - handler, default action while object click;</li>
+                                  <li>inv(s, that) - handler, default action on inventory click;</li>
+                                  <li>on{use, act, tak, inv, walk} - handler, response before call appropriate handlers, can cancel the chain;</li>
+                                  <li>after{use, act, tak, inv, walk} - handler, reaction after plaayer action.</li>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="column_space" width="2%"></td>
+                        <td class="column_2" width="32%" valign="top">
+                            <div class="block">
+                                <h3 class="block_title">Default handlers</h3>
+                                <div class="block_code">game.act = 'Not running.';
+                                  <br>game.use = 'It does not help.';
+                                  <br>game.inv = 'Why?';</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Global variables</h3>
+                                <div class="block_code">global { -- definition of global variables
+                                  <br>&nbsp;&nbsp;global_var = 1; -- number
+                                  <br>&nbsp;&nbsp;some_number = 1.2; -- number
+                                  <br>&nbsp;&nbsp;some_string = &#39;string&#39;;
+                                  <br>&nbsp;&nbsp;know_truth = false; -- a Boolean value
+                                  <br>&nbsp;&nbsp;array = {1, 2, 3, 4}; -- array
+                                  <br>}</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Constants</h3>
+                                <div class="block_code">const {
+                                    <br>&nbsp;&nbsp;A = 1;
+                                    <br>&nbsp;&nbsp;B = 2;
+                                    <br>}
+                                    <br>const 'Aflag' (false)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Declaration</h3>
+                                <div class="block_code">declare {
+                                    <br>&nbsp;&nbsp;A = 1;
+                                    <br>&nbsp;&nbsp;B = 2;
+                                    <br>}
+                                    <br>declare 'Z' (false)
+                                    <br>
+                                    <br>declare 'test' (function()
+                                    <br>&nbsp;&nbsp;p "Hello world!"
+                                    <br>end)
+                                    <br>
+                                    <br>global 'f' (test)</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Helper functions</h3>
+                                <div class="block_code">function mprint(n, ...)
+                                    <br>&nbsp;&nbsp;local a = {...}; -- temporary array with the arguments to the function
+                                    <br>&nbsp;&nbsp;p(a[n]) -- get the n-th element of the array
+                                    <br>end</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The "Player" Object</h3>
+                                <div class="block_text">By default, the attribute 'obj', the player represents the inventory.</div>
+                                <div class="block_code">game.player = player {
+                                    <br>&nbsp;&nbsp;nam = "Basil";
+                                    <br>&nbsp;&nbsp;room = 'kitchen'; -- the starting room of the player
+                                    <br>&nbsp;&nbsp;power = 100;
+                                    <br>&nbsp;&nbsp;obj = { 'Apple' }; -- let's give him an Apple
+                                    <br>};</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The "World" Object</h3>
+                                <div class="block_text"> The name of this object the 'game'.
+                                There is a reference variable, also called game.</div>
+                                <div class="block_code">game.act = 'does Not work.';
+                                    <br>game.inv = 'hmm ... Odd thing...';
+                                    <br>game.use = 'does Not work...';
+                                    <br>game.tak = 'I don't need this...';</div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Object methods (obj)</h3>
+                                <div class="block_code">
+                                  <li>:with({...}) - set list obj;</li>
+                                  <li>:new (...) constructor;</li>
+                                  <li>:actions(type, [value]) - set/read the number of event object the preset type;</li>
+                                  <li>:inroom([{}]) - in which room (room) the object is located;</li>
+                                  <li>:where([{}]) - what the object (objects) is a object;</li>
+                                  <li>:purge() - removes the object from all lists.</li>
+                                  <li>:remove() - remove object from all objects/rooms/equipment;</li>
+                                  <li>:close ()/open() - close/open;</li>
+                                  <li>:disable()/:enable() - disable/enable;</li>
+                                  <li>:closed() -- returns true if closed;</li>
+                                  <li>:disabled() -- returns true if disabled;</li>
+                                  <li>:empty() -- returns true if empty;- :save(fp, n) -- save function;</li>
+                                  <li>:display() -- display function in the scene;</li>
+                                  <li>:visible() -- returns true if it is visible;</li>
+                                  <li>:srch(w) - the search for the visible object;</li>
+                                  <li>:lookup(w) - search any object;</li>
+                                  <li>:for_each(fn, ...) -- iterator over the objects;</li>
+                                  <li>:lifeon()/:lifeoff() -- add/remove from the list of living;</li>
+                                  <li>:live() -- returns true if the list alive.</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Room methods (room)</h3>
+                                <div class="block_text">In addition to the methods of obj, added the following methods:</div>
+                                <div class="block_code">
+                                  <li>:from() -- where I came into the room;</li>
+                                  <li>:visited() -- was there a room you visited earlier?;</li>
+                                  <li>:visits() -- number of visits (0-if not);</li>
+                                  <li>:scene() -- display scene (no objects);</li>
+                                  <li>:display() -- display of objects in the scene;</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Dialogs metods (dlg)</h3>
+                                <div class="block_text">In addition to the methods room, added the following methods:</div>
+                                <div class="block_code">
+                                  <li>:push(phrase) - go to phrase, remembering it in the stack;</li>
+                                  <li>:reset(phrase) - same, but reset the stack;</li>
+                                  <li>:pop(phrase) -- return stack;</li>
+                                  <li>:select(phrase) -- select current phrase;</li>
+                                  <li>:ph_display() -- display the selected phrase;</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">The game world (game object)</h3>
+                                <div class="block_text">In addition to the methods of obj, added the following methods:</div>
+                                <div class="block_code">
+                                  <li>:time([v]) -- set/get the number of game cycles;</li>
+                                  <li>:lifeon([v])/:lifeoff([v]) -- add/remove an object from the list alive, or enable/disable live listings globally (if not specified argument);</li>
+                                  <li>:live([v]) -- check the activity of the life object;</li>
+                                  <li>:set_pl(pl) -- switch player</li>
+                                  <li>:life () - the iteration of live objects;</li>
+                                  <li>:step() -- tact of the game;</li>
+                                  <li>:lastdisp([v]) - set/get the latest output;</li>
+                                  <li>:display(state) -- display output;</li>
+                                  <li>:lastreact([v]) - set/get the latest reaction;</li>
+                                  <li>:reaction([v]) -- set/get current response;</li>
+                                  <li>:events(pre, bg) -- set/get events of live objects;</li>
+                                  <li>:cmd(cmd) -- the command INSTEAD;</li>
+                                </div>
+                            </div>
+                            <div class="column_space" height="2%"></div>
+                            <div class="block">
+                                <h3 class="block_title">Player (player)</h3>
+                                <div class="block_text">In addition to the methods of obj, added the following methods:</div>
+                                <div class="block_code">
+                                  <li>:moved () - the player made a move in the current cycle of the game;</li>
+                                  <li>:need_scene([v]) - need to render the scene in this cycle;</li>
+                                  <li>:inspect(w) - find an object (visible) in the current scene or really;</li>
+                                  <li>:have(w) - search in the inventory;</li>
+                                  <li>:useit(w) - use item;</li>
+                                  <li>:useon(w, ww) -- use the item on the subject;</li>
+                                  <li>:call(m, ...) -- calling a method of the player;</li>
+                                  <li>:action(w) - action on the subject (act);</li>
+                                  <li>:inventory() -- return the inventory (list, default is obj);</li>
+                                  <li>:take(w) -- take the object;</li>
+                                  <li>:walk/walkin/walkout -- transitions;</li>
+                                  <li>:go(w) - team go (checking the availability of transitions);</li>
+                                </div>
+                            </div>
+                            </td>
+                        <td class="column_space" width="2%"></td>
+                        <!-- columns -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
